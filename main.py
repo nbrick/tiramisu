@@ -4,16 +4,19 @@ mySum = 4
 
 xs.append(-mySum)
 
-a = sum(filter(lambda x: x < 0, xs))
-b = sum(filter(lambda x: x > 0, xs))
 
-q = {}
+def q(i, s):
+    if i == 0:
+        r = xs[i] == s
+        if r:
+            print(xs[i])
+        return r
+    else:
+        if q(i - 1, s - xs[i]):
+            print(xs[i])
+            return True
+        else:
+            return q(i - 1, s) or xs[i] == s
 
-for s in range(a, b + 1):
-    q[(1, s)] = xs[0] == s
 
-print(q)
-
-q = {}
-
-# print(sorted(xs))
+q(len(xs) - 1, 0)
