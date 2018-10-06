@@ -1,3 +1,5 @@
+from pprint import pprint
+
 xs = [1, 3, 5, 3]
 
 mySum = 4
@@ -5,21 +7,26 @@ mySum = 4
 xs.append(-mySum)
 
 
-def q(i, s, subset):
+class Node:
+    def __init__(self, i, s, left, right, truth):
+        self.i = i
+        self.s = s
+        self.left = left
+        self.right = right
+        self.truth = truth
+
+    def __repr__(self):
+        return str((self.i, self.s, self.left, self.right, self.truth))
+
+
+# Int -> Int -> Node
+def q(i, s):
     if i == 0:
-        r = xs[i] == s
-        if r:
-            subset.append(xs[i])
-        return r
+        return Node(i, s, None, None, xs[i] == s)
     else:
-        r = q(i - 1, s - xs[i], subset)
-        if r:
-            subset.append(xs[i])
-        return any([r, q(i - 1, s, subset), xs[i] == s])
+        left = q(i - 1, s)
+        right = q(i - 1, s - xs[i])
+        return Node(i, s, left, right, xs[i] == s)
 
 
-subset = []
-
-q(len(xs) - 1, 0, subset)
-
-print(subset)
+pprint(q(len(xs) - 1, 0))
