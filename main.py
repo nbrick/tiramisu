@@ -19,9 +19,9 @@ class Node:
             return_string.append(" <-------")
         for child in filter(lambda x: x is not None, [self.left, self.right]):
             if child.truth:
-                return_string.extend(["\n", " " * (depth+1), child.__repr__(depth+1)])
+                return_string.extend(["\n", "   " * (depth+1), child.__repr__(depth+1)])
             else:
-                return_string.extend(["\n", " " * (depth+1), child.__repr__(depth+1)])
+                return_string.extend(["\n", "   " * (depth+1), child.__repr__(depth+1)])
         return "".join(return_string)
 
 # Int -> Int -> Node
